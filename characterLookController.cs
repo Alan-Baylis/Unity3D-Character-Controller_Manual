@@ -20,8 +20,9 @@ public class characterLookController : MonoBehaviour {
 	public float smooth; //this variable deals with smoothing the movement, I find using a value of ~2.0 works best
 	public float maxY; //this variable deals with setting the maximum angle of elevation in degrees, I find using a value of ~45.0 works best
 	public float minY; //this variable deals with setting the minimum angle of depression in degrees, I find using a value of ~-45.0 works best
-	public bool invertVertical; //this variable deals with inverting up/ down looking, I prefer setting it to false
-	public bool invertHorizontal; //this variable deals with inverting left/ right looking, I prefer setting it to false
+	//the following variables set optional control inversion. Next to them are my reccomended defaults.
+	public bool invertVertical; //false
+	public bool invertHorizontal; //false
 	//non-public global variables
 	Vector2 smoothV;
 	Vector2 eulerAnglesVar;
