@@ -23,28 +23,51 @@ public class characterMovementController : MonoBehaviour {
 	//public variables
 	public float walkSpeed; //this variable deals with walking speed, I find using a value of ~3.0 works best
 	public float sprintMultiplier; //this variable deals with the sprint (LShift) multiplier to walking speed, I find using a value of ~2.0 works best
-	//non-public global variable
+	//the following variables set the keys for certain commands. Next to them are my reccomended settings (case sensitive, without quotes)
+	public string forwardMove; //"w"
+	public string backwardMove; //"s"
+	public string leftMove; //"a"
+	public string rightMove; //"d"
+	public string sprint; //"left shift"
+	public string autoSprintToggle; //"caps lock"
+	public string escape; //"escape"
+	//non-public global variables
 	float speed;
-	bool capsLock = false;
+	bool autoSprint = false;
+	int vertical = 0;
+	int horizontal = 0;
 	//initializing the cursor lockstate
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 	void Update() {
+		//sets the controls
+		if (Input.GetKey (forwardMove))
+			vertical = 1;
+		else if (Input.GetKey (backwardMove))
+			vertical = -1;
+		else
+			vertical = 0;
+		if (Input.GetKey (rightMove))
+			horizontal = 1;
+		else if (Input.GetKey (leftMove))
+			horizontal = -1;
+		else
+			horizontal = 0;
 		//toggles capslock (autosprint)
-		if (Input.GetKeyDown(KeyCode.CapsLock))
-			if (capsLock) capsLock = false; else capsLock = true;
+		if (Input.GetKeyDown(autoSprintToggle))
+		if (autoSprint) autoSprint = false; else autoSprint = true;
 		//makes sure you can only sprint foreward
-		if (Input.GetKey (KeyCode.W) && (Input.GetKey (KeyCode.LeftShift) || capsLock)) 
+		if (Input.GetKey (forwardMove) && (Input.GetKey (sprint) || autoSprint)) 
 			speed = walkSpeed * sprintMultiplier;
 		else speed = walkSpeed;
 		//getting the direction 
-		float forewardBack = Input.GetAxis ("Vertical") * speed * Time.deltaTime;
-		float leftRight = Input.GetAxis ("Horizontal") * speed * Time.deltaTime;
+		float forewardBack = vertical * speed * Time.deltaTime;
+		float leftRight = horizontal * speed * Time.deltaTime;
 		transform.Translate (leftRight, 0, forewardBack);
 		//changing the cursor lockstate upon pressing escape, or update it if it's visible.
 		if(Input.anyKeyDown) Cursor.lockState = CursorLockMode.Locked;
-		if(Input.GetKeyDown(KeyCode.Escape)) Cursor.lockState = CursorLockMode.None;
+		if(Input.GetKeyDown(escape)) Cursor.lockState = CursorLockMode.None;
 
 	}
 }
