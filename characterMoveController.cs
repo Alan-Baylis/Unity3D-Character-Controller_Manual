@@ -4,8 +4,10 @@
  * This script should be attatched to a rigidbody object parented to a camera that has the
  * characterLookController.cs script attatched to it. The following adjustments are not 
  * necessary, but highly reccomended: 
- * In the Rigidbody tab, open the constraints menu and freeze the X and Z rotation.
- * In the Rigidbody tab, open the constraints menu and freeze the Y position.
+ * In the Rigidbody component, open the constraints menu and freeze the X and Z rotation.
+ * In the Rigidbody component, open the constraints menu and freeze the Y position.
+ * In the Rigidbody component, select 'Interpolate' from the Interpolate menu.
+ * In the Rigidbody component, select 'Continuous' (or 'Continuous Dynamic') from the Collision Detection menu.
  * 
  * This script is complete and you can copy/ paste it as-is.
  * 
