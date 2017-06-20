@@ -25,20 +25,26 @@ public class characterMovementController : MonoBehaviour {
 	public float sprintMultiplier; //this variable deals with the sprint (LShift) multiplier to walking speed, I find using a value of ~2.0 works best
 	//non-public global variable
 	float speed;
+	bool capsLock = false;
 	//initializing the cursor lockstate
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 	void Update() {
+		//toggles capslock (autosprint)
+		if (Input.GetKeyDown(KeyCode.CapsLock))
+			if (capsLock) capsLock = false; else capsLock = true;
 		//makes sure you can only sprint foreward
-		if (Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.LeftShift)){
+		if (Input.GetKey (KeyCode.W) && (Input.GetKey (KeyCode.LeftShift) || capsLock)) 
 			speed = walkSpeed * sprintMultiplier;
-		} else {speed = walkSpeed;}
+		else speed = walkSpeed;
 		//getting the direction 
 		float forewardBack = Input.GetAxis ("Vertical") * speed * Time.deltaTime;
 		float leftRight = Input.GetAxis ("Horizontal") * speed * Time.deltaTime;
 		transform.Translate (leftRight, 0, forewardBack);
-		//changing the cursor lockstate upon pressing escape
-		if(Input.GetKeyDown("escape")) Cursor.lockState = CursorLockMode.None;
+		//changing the cursor lockstate upon pressing escape, or update it if it's visible.
+		if(Input.anyKeyDown) Cursor.lockState = CursorLockMode.Locked;
+		if(Input.GetKeyDown(KeyCode.Escape)) Cursor.lockState = CursorLockMode.None;
+
 	}
 }
