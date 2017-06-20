@@ -1,5 +1,5 @@
 # Unity3D
-Use of these scripts is free (read: http://unlicense.org/). Crediting the author (me! :D) is not required at all, athough it is
+Use of these scripts is free (<http://unlicense.org>). Crediting the author (me! :D) is not required at all, athough it is
 not discouraged or unwelcomed - although I encourage anyone using these assets to contribute to the public domain aswell by
 releasing as many scripts and projects as you feel comfortable with under the Unlicense/ similar licenses where you can legally 
 and ethically do so.
