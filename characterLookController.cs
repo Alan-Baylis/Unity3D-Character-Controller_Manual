@@ -1,7 +1,9 @@
 /*
  * Deals with rotating the camera.
  * 
- * This script should be attatched to a camera which is a direct child to a rigidbody object.
+ * This script should be attatched to a camera which is a direct child to a rigidbody object
+ * that has the characterMoveController.cs script attatched to it.
+ * 
  * This script is complete and you can copy/ paste it as-is.
  * 
  * Remember: It's unnecessary to change public variables right in this script as they can be 
