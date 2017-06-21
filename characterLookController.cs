@@ -23,7 +23,7 @@ public class characterLookController : MonoBehaviour {
 	//the following variables set optional control inversion. Next to them are my reccomended defaults.
 	public bool invertVertical; //false
 	public bool invertHorizontal; //false
-	//non-public global variables
+	//locals
 	Vector2 smoothV;
 	Vector2 eulerAnglesVar;
 	float invertVerticalFact;
