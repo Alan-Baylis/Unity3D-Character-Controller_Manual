@@ -31,7 +31,7 @@ public class characterMovementController : MonoBehaviour {
 	public string sprint; //"left shift"
 	public string autoSprintToggle; //"caps lock"
 	public string escape; //"escape"
-	//non-public global variables
+	//locals
 	float speed;
 	bool autoSprint = false;
 	int vertical = 0;
