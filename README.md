@@ -30,5 +30,5 @@ explanatory comments that explain code segments, but these should not be necessa
 10. On the rigidbody in the inspector under the script component, fill in the variables with your desired values.
     (Examples are given as comments in the actual script.)
 11. On the camera in the inspector under the script component, check the invert axes buttons if you prefer them.
-12. Ensure that your character is on a surface with a collider so it doesn't just fall out of the world.
+12. Ensure that your character is on a surface with a collider. 
 
