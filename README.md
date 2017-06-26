@@ -19,3 +19,15 @@ Whenever you use a script from this repository, make sure to read the documentat
 11. From the inspector, enter the values for your preferred mouse setup. (recommended values are given in the script as comments).
 
 # Using this script bundle as a third-person controller
+1. Create a 3D game object with a collider (a capsule is recommended). This will be referred to as the “player.”
+2. From the inspector, apply a Rigidbody to the player. I recommend going into constraints and freezing X rotation and Z rotation. (If the character randomly “jumps” to a certain altitude,ensure that the surface it is standing on is not convex. If this does not fix the issue, consider also freezing the Y position.)
+3. Create an empty game object and drag it onto the player object, making it a child object of the player. Ensure that the (local) X, Y and Z coordinates are 0 from the transform component. This will be referred to as the “pivot.”
+4. Create a camera object and drag it onto the pivot, making it a child object of the pivot. Move  and rotate the camera so that the player can be seen from your desired perspective.
+5. Create a C# file and name it “characterMoveController” (without quotes).
+6. Open the file and delete all the starter code, then paste in the code from the characterMoveController.cs file in this repository.
+7. Save the file and drag it onto the player.
+8. From the inspector, enter the key ID tags for your preferred controller setup. (recommended values are given in the script as comments).
+9. Create a C# file and name it “characterLookController” (without quotes).
+10. Open the file and delete all the starter code, then paste in the code from the characterLookController.cs file in this repository.
+11. Save the file and drag it onto the pivot.
+12. From the inspector, enter the values for your preferred mouse setup. (recommended values are given in the script as comments).
