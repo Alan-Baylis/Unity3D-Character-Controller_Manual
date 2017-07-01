@@ -16,20 +16,25 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterLookController : MonoBehaviour {
 	//public variables
-	public float sensitivity; //this variable deals with mouse sensitivity, I find using a value of ~3.0 works best
-	public float smooth; //this variable deals with smoothing the movement, I find using a value of ~2.0 works best
-	public float maxY; //this variable deals with setting the maximum angle of elevation in degrees, I find using a value of ~45.0 works best
-	public float minY; //this variable deals with setting the minimum angle of depression in degrees, I find using a value of ~-45.0 works best
+	[SerializeField]
+	private float sensitivity; //this variable deals with mouse sensitivity, I find using a value of ~3.0 works best
+	[SerializeField]
+	private float smooth; //this variable deals with smoothing the movement, I find using a value of ~2.0 works best
+	[SerializeField]
+	private float maxY; //this variable deals with setting the maximum angle of elevation in degrees, I find using a value of ~45.0 works best
+	[SerializeField]
+	private float minY; //this variable deals with setting the minimum angle of depression in degrees, I find using a value of ~-45.0 works best
 	//the following variables set optional control inversion. Next to them are my reccomended defaults.
-	public bool invertVertical; //false
-	public bool invertHorizontal; //false
+	[SerializeField]
+	private bool invertVertical; //false
+	[SerializeField]
+	private bool invertHorizontal; //false
 	//locals
-	Vector2 smoothV;
-	Vector2 eulerAnglesVar;
-	float invertVerticalFact;
-	float invertHorizontalFact;
-	//Declarations and initializations
-	GameObject character;
+	private Vector2 smoothV;
+	private Vector2 eulerAnglesVar;
+	private float invertVerticalFact;
+	private float invertHorizontalFact;
+	private GameObject character;
 	void Start () {
 		//these deal with inverting controls
 		invertVerticalFact = (invertVertical) ? -1 : 1;
@@ -38,17 +43,15 @@ public class characterLookController : MonoBehaviour {
 		character = this.transform.parent.gameObject;
 	}
 	//Rotating the mouse
-	private void Update() {
+	void LateUpdate() {
 		// Move and smooth
-		Vector2 mouseMove = new Vector2 (Input.GetAxisRaw ("Mouse X"), Input.GetAxisRaw ("Mouse Y"));
-		mouseMove *= sensitivity * smooth;
-		smoothV.x = Mathf.Lerp (smoothV.x, mouseMove.x, 1f / smooth);
-		smoothV.y = Mathf.Lerp (smoothV.y, mouseMove.y, 1f / smooth);
+		Vector2 mouseMove = new Vector2 (Input.GetAxis ("Mouse X"), Input.GetAxis ("Mouse Y"));
+		mouseMove *= sensitivity;
+		smoothV.x = Mathf.LerpAngle (smoothV.x, mouseMove.x, (Time.smoothDeltaTime * smooth));
+		smoothV.y = Mathf.LerpAngle (smoothV.y, mouseMove.y, (Time.smoothDeltaTime * smooth));
 		// Euler rotation
-		eulerAnglesVar.x += smoothV.y * invertVerticalFact;
-		eulerAnglesVar.y += smoothV.x * invertHorizontalFact;
-		//clamps the up/ down rotation
-		eulerAnglesVar.x = Mathf.Clamp(eulerAnglesVar.x, minY, maxY);
+		eulerAnglesVar.x = Mathf.Clamp ((eulerAnglesVar.x + smoothV.y * invertVertical), minY, maxY);
+		eulerAnglesVar.y += smoothV.x * invertHorizontal;
 		//apply Changes
 		transform.localRotation = Quaternion.AngleAxis (-eulerAnglesVar.x, Vector3.right);
 		character.transform.localRotation = Quaternion.AngleAxis (eulerAnglesVar.y, character.transform.up);
