@@ -21,21 +21,30 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterMovementController : MonoBehaviour {
 	//public variables
-	public float walkSpeed; //this variable deals with walking speed, I find using a value of ~3.0 works best
-	public float sprintMultiplier; //this variable deals with the sprint (LShift) multiplier to walking speed, I find using a value of ~2.0 works best
+	[SerializeField]
+	private float walkSpeed; //this variable deals with walking speed, I find using a value of ~3.0 works best
+	[SerializeField]
+	private float sprintMultiplier; //this variable deals with the sprint (LShift) multiplier to walking speed, I find using a value of ~2.0 works best
 	//the following variables set the keys for certain commands. Next to them are my reccomended settings (case sensitive, without quotes)
-	public string forwardMove; //"w"
-	public string backwardMove; //"s"
-	public string leftMove; //"a"
-	public string rightMove; //"d"
-	public string sprint; //"left shift"
-	public string autoSprintToggle; //"caps lock"
-	public string escape; //"escape"
+	[SerializeField]
+	private string forwardMove; //"w"
+	[SerializeField]
+	private string backwardMove; //"s"
+	[SerializeField]
+	private string leftMove; //"a"
+	[SerializeField]
+	private string rightMove; //"d"
+	[SerializeField]
+	private string sprint; //"left shift"
+	[SerializeField]
+	private string autoSprintToggle; //"caps lock"
+	[SerializeField]
+	private string escape; //"escape"
 	//locals
-	float speed;
-	bool autoSprint = false;
-	int vertical = 0;
-	int horizontal = 0;
+	private float speed;
+	private bool autoSprint = false;
+	private int vertical = 0;
+	private int horizontal = 0;
 	//initializing the cursor lockstate
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
